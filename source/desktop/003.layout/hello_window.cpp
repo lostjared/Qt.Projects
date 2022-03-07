@@ -6,17 +6,17 @@
 
 HelloWorld::HelloWorld() {
     setWindowTitle("Hello World");
-    QPushButton *button1 = new QPushButton("HelloOne");
-    QLineEdit *lineEdit1 = new QLineEdit();
-    QPushButton *button2 = new QPushButton("Hello Two");
-    QLineEdit *lineEdit2 = new QLineEdit();
-    QPushButton *button3 = new QPushButton("Hello Three");
-    QLineEdit *lineEdit3 = new QLineEdit();
+    QPushButton *btn1 = new QPushButton("Hello One");
+    QLineEdit *le1 = new QLineEdit();
+    QPushButton *btn2 = new QPushButton("Hello Two");
+    QLineEdit *le2 = new QLineEdit();
+    QPushButton *btn3 = new QPushButton("Hello Three");
+    QLineEdit *le3 = new QLineEdit();
     
     QFormLayout *layout = new QFormLayout;
-    layout->addRow(button1, lineEdit1);
-    layout->addRow(button2, lineEdit2);
-    layout->addRow(button3, lineEdit3);
+    layout->addRow(btn1, le1);
+    layout->addRow(btn2, le2);
+    layout->addRow(btn3, le3);
     
     setLayout(layout);
 }
