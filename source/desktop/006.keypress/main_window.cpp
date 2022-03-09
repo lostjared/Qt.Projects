@@ -1,6 +1,6 @@
 #include"main_window.hpp"
 #include<QPainter>
-
+#include<QMessageBox>
 
 MainWindow::MainWindow() {
     setWindowTitle("Grid");
@@ -21,4 +21,11 @@ void MainWindow::paintEvent(QPaintEvent *e) {
 void MainWindow::keyPressEvent(QKeyEvent *ke) {
     if(ke->key() == Qt::Key_Escape)
         exit(0);
+    
+    QString value;
+    QTextStream stream(&value);
+    
+    stream << "Key pressed. KeyCode: " << ke->key() << "\n";
+    
+    QMessageBox::information(this, value, value);
 }
