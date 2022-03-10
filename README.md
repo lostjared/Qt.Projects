@@ -1,2 +1,4 @@
 # Qt.Projects
-Practice Projects with Qt
+
+This folder will contain Practice Projects with Qt written in C++.
+
