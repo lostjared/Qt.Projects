@@ -2,7 +2,7 @@
 #include<QPainter>
 
 
-MainWindow::MainWindow() {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setWindowTitle("Grid");
     setFixedSize(800, 600);
 }
