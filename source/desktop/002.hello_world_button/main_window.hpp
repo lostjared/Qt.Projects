@@ -8,7 +8,7 @@
 class HelloWorld : public QMainWindow {
     Q_OBJECT
 public:
-    HelloWorld(QWidget *parent = 0);
+    explicit HelloWorld(QWidget *parent = 0);
     
 public slots:
     void sayHello();
