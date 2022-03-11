@@ -4,7 +4,7 @@
 #include<QPushButton>
 #include<QMessageBox>
 
-HelloWorld::HelloWorld() {
+HelloWorld::HelloWorld(QWidget *parent) : QDialog(parent)  {
     setWindowTitle("Hello World");
    
     QHBoxLayout *layout = new QHBoxLayout;

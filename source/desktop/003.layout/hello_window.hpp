@@ -6,7 +6,7 @@
 class HelloWorld : public QDialog {
     Q_OBJECT
 public:
-    HelloWorld();
+    explicit HelloWorld(QWidget *parent = 0);
 };
 
 

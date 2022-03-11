@@ -4,7 +4,7 @@
 #include<QPushButton>
 
 
-HelloWorld::HelloWorld() {
+HelloWorld::HelloWorld(QWidget *parent) : QDialog(parent) {
     setWindowTitle("Hello World");
     QPushButton *btn1 = new QPushButton("Hello One");
     QLineEdit *le1 = new QLineEdit();
