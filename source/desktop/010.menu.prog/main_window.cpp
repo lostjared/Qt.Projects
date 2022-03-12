@@ -12,8 +12,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     
     file_menu->addAction(file_menu_hello);
 
+    submenu = file_menu->addMenu(tr("Sub"));
+    submenu_action = new QAction(tr("Item 1"), this);
+    
+    
+    submenu_action->setCheckable(true);
+    submenu_action->setChecked(true);
+    
+    submenu->addAction(submenu_action);
+    
     connect(file_menu_hello, SIGNAL(triggered()), this, SLOT(sayHello()));
     
+    connect(submenu_action, SIGNAL(triggered()), this, SLOT(toggleItem()));
 }
 
 void MainWindow::paintEvent(QPaintEvent *e) {
@@ -38,4 +48,11 @@ void MainWindow::mousePressEvent(QMouseEvent *ke) {
 
 void MainWindow::sayHello() {
     QMessageBox::information(this, tr("Hello World"), tr("Hello World"));
+}
+
+void MainWindow::toggleItem() {
+    if(submenu_action->isChecked())
+        QMessageBox::information(this, tr("Checked"), tr("Checked"));
+    else
+        QMessageBox::information(this, tr("Not Checked"), tr("Not Checked"));
 }

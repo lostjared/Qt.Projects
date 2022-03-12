@@ -17,10 +17,12 @@ public:
     
 public slots:
     void sayHello();
+    void toggleItem();
     
 private:
-    QMenu *file_menu;
+    QMenu *file_menu, *submenu;
     QAction *file_menu_hello;
+    QAction *submenu_action;
     
 };
 
