@@ -57,6 +57,12 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     difficulty_level = 0;
     game_started = false;
     connect(file_menu_new, SIGNAL(triggered()), this, SLOT(newGame()));
+
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+
+    background_proc = new QTimer(this);
+    connect(background_proc, SIGNAL(timeout()), this, SLOT(proc()));
 }
 
 QImage GameWindow::loadAndScale(QString filename) {
@@ -164,18 +170,13 @@ void GameWindow::proc() {
   
 
 void GameWindow::newGame() {
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    int interval = 1000;
+     int interval = 1000;
     if(difficulty_level == 1)
         interval = 750;
     else if(difficulty_level == 2)
         interval = 500;
     
     game_started = true;
-
-    background_proc = new QTimer(this);
-    connect(background_proc, SIGNAL(timeout()), this, SLOT(proc()));
 
     timer->setInterval(interval);
     background_proc->setInterval(10);
