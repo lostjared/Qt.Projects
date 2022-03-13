@@ -88,6 +88,18 @@ void GameWindow::paintEvent(QPaintEvent *e) {
     paint.drawImage(p.blocks[1].getX()*BLOCK_WIDTH, p.blocks[1].getY()*BLOCK_HEIGHT, blocks[static_cast<int>(p.blocks[1].getType())-2]);
     paint.drawImage(p.blocks[2].getX()*BLOCK_WIDTH, p.blocks[2].getY()*BLOCK_HEIGHT, blocks[static_cast<int>(p.blocks[2].getType())-2]);
 
+    if(game_started == false) {
+        QFont font = paint.font();
+        font.setPixelSize(70);
+        font.setBold(true);
+        paint.setFont(font);
+        QPen pen = paint.pen();
+        pen.setColor(QColor(QRgb(0xFFFFFF)));
+        paint.setPen(pen);
+        paint.drawText(425, 150, "Puzzle Drop");
+        paint.drawText(235, 250, "Click New Game in Menu");
+    }
+
 }
 
 void GameWindow::keyPressEvent(QKeyEvent *ke) {
