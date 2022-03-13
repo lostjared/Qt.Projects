@@ -43,9 +43,13 @@ namespace puzzle {
         void moveLeft();
         void moveRight();
         void moveDown();
+        void rotateLeft();
+        void rotateRight();
         void shift(Direction dir);
         Block blocks[3];
         friend std::ostream &operator<<(std::ostream &out, Piece &p);
+    private:
+        int position;
     };
 
     class Grid {
@@ -62,6 +66,8 @@ namespace puzzle {
         void keyDown();
         void keyShiftUp();
         void keyShiftDown();
+        void keyRotateLeft();
+        void keyRotateRight();
         void update();
         int level() const;
         void level_next();

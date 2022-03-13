@@ -132,6 +132,14 @@ void GameWindow::keyPressEvent(QKeyEvent *ke) {
             grid.keyShiftDown();
             repaint();
             break;
+        case Qt::Key_Z:
+            grid.keyRotateLeft();
+            repaint();
+            break;
+        case Qt::Key_X:
+            grid.keyRotateRight();
+            repaint();
+            break;
     }
 }
 

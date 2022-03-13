@@ -74,6 +74,7 @@ namespace puzzle {
         blocks[1].y = start_y+1;
         blocks[2].x = start_x;
         blocks[2].y = start_y+2;
+        position = 0;
         randColors();
     }
 
@@ -111,6 +112,39 @@ namespace puzzle {
         for(int i = 0; i < 3; ++i)
             blocks[i].y++;
     }
+
+    void Piece::rotateLeft() {
+        if(position == 0) {
+            blocks[1].y -= 1;
+            blocks[1].x -= 1;
+            blocks[2].x -= 2;
+            blocks[2].y -= 2;
+            position = 1;
+        } else if(position == 1) {
+            blocks[1].y += 1;
+            blocks[1].x += 1;
+            blocks[2].y += 2;
+            blocks[2].x += 2;
+            position = 0;
+        }
+    }
+    
+    void Piece::rotateRight() {
+        if(position == 0) {
+            blocks[1].x += 1;
+            blocks[1].y -= 1;
+            blocks[2].x += 2;
+            blocks[2].y -= 2;
+            position = 2;
+        } else if(position == 2) {
+            blocks[1].x -= 1;
+            blocks[1].y += 1;
+            blocks[2].x -= 2;
+            blocks[2].y += 2;
+            position = 0;
+        }
+    }
+
 
     std::ostream &operator<<(std::ostream &out, Piece &p) {
         out << "Piece: " << p.blocks[0] << p.blocks[1] << p.blocks[2] << "\n";
@@ -185,6 +219,15 @@ namespace puzzle {
             piece.newPiece(grid_w/2, 0);
         }
     }
+
+    void Grid::keyRotateLeft() {
+        piece.rotateLeft();
+    }
+    
+    void Grid::keyRotateRight() {
+        piece.rotateRight();
+    }
+
 
     void Grid::keyShiftUp() {
         piece.shift(D_UP);
