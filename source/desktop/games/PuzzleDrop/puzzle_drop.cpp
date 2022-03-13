@@ -136,6 +136,7 @@ namespace puzzle {
                 blocks[i][z] = Block(i, z, BlockType::BLOCK_NULL);
             }
         }
+        game_level = 1;
     }
     
     Grid::~Grid() {
@@ -225,6 +226,15 @@ namespace puzzle {
 
     void Grid::procMoveDown() {
     
+    }
+
+    int Grid::level() const {
+        return game_level;
+    }
+        
+    void Grid::level_next() {
+        if(game_level < 7) 
+            ++game_level;
     }
 
 }

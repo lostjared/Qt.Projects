@@ -68,7 +68,7 @@ void GameWindow::paintEvent(QPaintEvent *e) {
     Q_UNUSED(e);
     QPainter paint(this);
 
-    paint.drawImage(0, 0, background[0]);
+    paint.drawImage(0, 0, background[grid.level()-1]);
     
     for(int x = 0; x < grid.getWidth(); ++x) {
         for(int y = 0; y < grid.getHeight(); ++y) {

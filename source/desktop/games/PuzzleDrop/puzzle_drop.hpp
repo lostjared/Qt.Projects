@@ -63,10 +63,13 @@ namespace puzzle {
         void keyShiftUp();
         void keyShiftDown();
         void update();
+        int level() const;
+        void level_next();
     protected:
         Block **blocks;
         Piece piece;
         int grid_w, grid_h;
+        int game_level;
         
         bool checkPiece(int x, int y);
         void setPiece();
