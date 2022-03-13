@@ -20,9 +20,11 @@ public:
     GameWindow();
     void paintEvent(QPaintEvent *e);
     void keyPressEvent(QKeyEvent *ke);
+    void gameOver();
     
 public slots:
     void update();
+    void proc();
     void setEasy();
     void setMedium();
     void setHard();
@@ -30,7 +32,7 @@ public slots:
   
 private:
     puzzle::Grid grid;
-    QTimer *timer;
+    QTimer *timer, *background_proc;
     QImage blocks[9];
     QImage background[8];
     QMenu *file_menu, *options_menu, *help_menu, *diff_menu;
@@ -39,6 +41,7 @@ private:
     QAction *diff_easy, *diff_med, *diff_hard;
     QImage loadAndScale(QString filename);
     int difficulty_level;
+    bool game_started;
 };
 
 

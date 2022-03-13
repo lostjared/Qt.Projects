@@ -55,6 +55,7 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     connect(diff_med, SIGNAL(triggered()), this, SLOT(setMedium()));
     connect(diff_hard, SIGNAL(triggered()), this, SLOT(setHard()));
     difficulty_level = 0;
+    game_started = false;
     connect(file_menu_new, SIGNAL(triggered()), this, SLOT(newGame()));
 }
 
@@ -93,6 +94,10 @@ void GameWindow::keyPressEvent(QKeyEvent *ke) {
     
     if(ke->key() == Qt::Key_Escape)
         exit(0);
+
+    if(game_started == false)
+        return;
+
     
     switch(ke->key()) {
         case Qt::Key_Left:
@@ -118,10 +123,22 @@ void GameWindow::keyPressEvent(QKeyEvent *ke) {
     }
 }
 
+void GameWindow::gameOver() {
+    background_proc->stop();
+    timer->stop();
+    game_started = false;
+}
+  
+
 void GameWindow::update() {
     grid.keyDown();
     repaint();
 }
+
+void GameWindow::proc() {
+    grid.update();
+}
+  
 
 void GameWindow::newGame() {
     timer = new QTimer(this);
@@ -132,8 +149,15 @@ void GameWindow::newGame() {
     else if(difficulty_level == 2)
         interval = 500;
     
+    game_started = true;
+
+    background_proc = new QTimer(this);
+    connect(background_proc, SIGNAL(timeout()), this, SLOT(proc()));
+
     timer->setInterval(interval);
+    background_proc->setInterval(10);
     timer->start();
+    background_proc->start();
 }
 
 void GameWindow::setEasy() {
