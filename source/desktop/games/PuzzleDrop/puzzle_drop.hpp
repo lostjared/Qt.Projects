@@ -38,6 +38,10 @@ namespace puzzle {
     class Piece {
     public:
         Piece();
+        Piece(const Piece &p);
+        Piece(Piece &&p);
+        Piece &operator=(const Piece &p);
+        Piece &operator=(Piece &&p);
         void newPiece(int start_x, int start_y);
         void randColors();
         void moveLeft();
@@ -46,6 +50,7 @@ namespace puzzle {
         void rotateLeft();
         void rotateRight();
         void shift(Direction dir);
+        int pos() const;
         Block blocks[3];
         friend std::ostream &operator<<(std::ostream &out, Piece &p);
     private:
@@ -77,7 +82,7 @@ namespace puzzle {
         int grid_w, grid_h;
         int game_level;
         
-        bool checkPiece(int x, int y);
+        bool checkPiece(Piece &p, int x, int y);
         void setPiece();
         void procBlocks();
         void procMoveDown();

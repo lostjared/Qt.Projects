@@ -67,6 +67,37 @@ namespace puzzle {
 
     }
 
+    Piece::Piece(const Piece &p) {
+        blocks[0] = p.blocks[0];
+        blocks[1] = p.blocks[1];
+        blocks[2] = p.blocks[2];
+        position = p.position;
+    }
+
+    Piece::Piece(Piece &&p) {
+        blocks[0] = p.blocks[0];
+        blocks[1] = p.blocks[1];
+        blocks[2] = p.blocks[2];
+        position = p.position;
+    }
+    
+    Piece &Piece::operator=(const Piece &p) {
+        blocks[0] = p.blocks[0];
+        blocks[1] = p.blocks[1];
+        blocks[2] = p.blocks[2];
+        position = p.position;
+        return *this;
+    }
+    
+    Piece &Piece::operator=(Piece &&p) {
+        blocks[0] = p.blocks[0];
+        blocks[1] = p.blocks[1];
+        blocks[2] = p.blocks[2];
+        position = p.position;
+        return *this;
+    }
+
+
     void Piece::newPiece(int start_x, int start_y) {
         blocks[0].x = start_x;
         blocks[0].y = start_y;
@@ -145,6 +176,10 @@ namespace puzzle {
         }
     }
 
+    int Piece::pos() const {
+        return position;
+    }
+
 
     std::ostream &operator<<(std::ostream &out, Piece &p) {
         out << "Piece: " << p.blocks[0] << p.blocks[1] << p.blocks[2] << "\n";
@@ -201,18 +236,18 @@ namespace puzzle {
     }
 
     void Grid::keyLeft() {
-        if(checkPiece(-1, 0)) {
+        if(checkPiece(piece, -1, 0)) {
             piece.moveLeft();
         }
     }
     void Grid::keyRight() {
-        if(checkPiece(1, 0)) {
+        if(checkPiece(piece, 1, 0)) {
             piece.moveRight();
         }
     }
 
     void Grid::keyDown() {
-        if(checkPiece(0, 1)) {
+        if(checkPiece(piece, 0, 1)) {
             piece.moveDown();
         } else {
             setPiece();
@@ -221,11 +256,19 @@ namespace puzzle {
     }
 
     void Grid::keyRotateLeft() {
-        piece.rotateLeft();
+        Piece test_piece(piece);
+        test_piece.rotateLeft();
+        if(checkPiece(test_piece, 0, 0)) {
+            piece.rotateLeft();
+        }
     }
     
     void Grid::keyRotateRight() {
-        piece.rotateRight();
+        Piece test_piece(piece);
+        test_piece.rotateRight();
+        if(checkPiece(test_piece, 0, 0)) {
+            piece.rotateRight();
+        }
     }
 
 
@@ -237,9 +280,9 @@ namespace puzzle {
         piece.shift(D_DOWN);
     }
 
-    bool Grid::checkPiece(int x, int y) {
+    bool Grid::checkPiece(Piece &p, int x, int y) {
         for(int i = 0; i < 3; ++i) {
-            Block *b = grid(piece.blocks[i].getX()+x, piece.blocks[i].getY()+y);
+            Block *b = grid(p.blocks[i].getX()+x, p.blocks[i].getY()+y);
             if(b == nullptr || (b->getType() != BlockType::BLOCK_NULL && b->getType() != BlockType::BLOCK_CLEAR)) {
                 return false;
             }
