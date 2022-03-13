@@ -109,26 +109,28 @@ void GameWindow::keyPressEvent(QKeyEvent *ke) {
             break;
         case Qt::Key_A:
             grid.keyShiftUp();
+            repaint();
             break;
         case Qt::Key_S:
             grid.keyShiftDown();
+            repaint();
             break;
     }
 }
 
 void GameWindow::update() {
-    grid.update();
+    grid.keyDown();
     repaint();
 }
 
 void GameWindow::newGame() {
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    int interval = 250;
+    int interval = 1000;
     if(difficulty_level == 1)
-        interval = 175;
+        interval = 750;
     else if(difficulty_level == 2)
-        interval = 100;
+        interval = 500;
     
     timer->setInterval(interval);
     timer->start();

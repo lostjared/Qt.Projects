@@ -20,14 +20,14 @@ public:
     GameWindow();
     void paintEvent(QPaintEvent *e);
     void keyPressEvent(QKeyEvent *ke);
-    void newGame();
     
 public slots:
     void update();
     void setEasy();
     void setMedium();
     void setHard();
-    
+    void newGame();
+  
 private:
     puzzle::Grid grid;
     QTimer *timer;
