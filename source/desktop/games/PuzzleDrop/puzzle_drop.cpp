@@ -301,24 +301,33 @@ namespace puzzle {
         }
     }
 
-    void Grid::update() {
+
+    bool Grid::procBlocks() {
     
-        procBlocks();
+        return false;
     }
 
-    void Grid::procBlocks() {
-    
-    }
-
-    void Grid::procMoveDown() {
-    
+    bool Grid::procMoveDown() {
+        for(int x = 0; x < grid_w; ++x) {
+            for(int y = 0; y < grid_h; ++y) {
+                Block *b1, *b2;
+                b1 = grid(x, y);
+                b2 = grid(x, y+1);
+                if(b1 != nullptr && b2 != nullptr && (b1->getType() != BlockType::BLOCK_NULL && b1->getType() != BlockType::BLOCK_CLEAR && b2->getType() == BlockType::BLOCK_NULL)) {
+                    *b2 = *b1;
+                    *b1 = BlockType::BLOCK_NULL;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     int Grid::level() const {
         return game_level;
     }
         
-    void Grid::level_next() {
+    void Grid::levelNext() {
         if(game_level < 7) 
             ++game_level;
     }

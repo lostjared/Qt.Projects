@@ -73,9 +73,10 @@ namespace puzzle {
         void keyShiftDown();
         void keyRotateLeft();
         void keyRotateRight();
-        void update();
-        int level() const;
-        void level_next();
+         int level() const;
+        void levelNext();
+        bool procMoveDown();
+        bool procBlocks();
     protected:
         Block **blocks;
         Piece piece;
@@ -84,8 +85,6 @@ namespace puzzle {
         
         bool checkPiece(Piece &p, int x, int y);
         void setPiece();
-        void procBlocks();
-        void procMoveDown();
     };
 
 }

@@ -156,7 +156,10 @@ void GameWindow::update() {
 }
 
 void GameWindow::proc() {
-    grid.update();
+    bool test_b1 = grid.procBlocks();
+    bool test_b2 = grid.procMoveDown();
+    if(test_b1 || test_b2)
+        repaint();  
 }
   
 
