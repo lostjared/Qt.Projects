@@ -419,6 +419,102 @@ namespace puzzle {
                        blocks[x+2][y].clearBlock();
                        return true;
                 }
+
+                // grid digaonal
+                if(checkBlock(x,y, BlockType::RED1) && checkBlock(x+1, y+1, BlockType::RED2) && checkBlock(x+2, y+2, BlockType::RED3)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y+1].clearBlock();
+                    blocks[x+2][y+2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::RED3) && checkBlock(x+1, y+1, BlockType::RED2) && checkBlock(x+2, y+2, BlockType::RED1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y+1].clearBlock();
+                    blocks[x+2][y+2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::GREEN1) && checkBlock(x+1, y+1, BlockType::GREEN2) && checkBlock(x+2, y+2, BlockType::GREEN3)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y+1].clearBlock();
+                    blocks[x+2][y+2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::GREEN3) && checkBlock(x+1, y+1, BlockType::GREEN2) && checkBlock(x+2, y+2, BlockType::GREEN1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y+1].clearBlock();
+                    blocks[x+2][y+2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::BLUE1) && checkBlock(x+1, y+1, BlockType::BLUE2) && checkBlock(x+2, y+2, BlockType::BLUE3)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y+1].clearBlock();
+                    blocks[x+2][y+2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::BLUE3) && checkBlock(x+1, y+1, BlockType::BLUE2) && checkBlock(x+2, y+2, BlockType::BLUE1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y+1].clearBlock();
+                    blocks[x+2][y+2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::RED1) && checkBlock(x+1, y-1, BlockType::RED2) && checkBlock(x+2, y-2, BlockType::RED3)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y-1].clearBlock();
+                    blocks[x+2][y-2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::RED3) && checkBlock(x+1, y-1, BlockType::RED2) && checkBlock(x+2, y-2, BlockType::RED1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y-1].clearBlock();
+                    blocks[x+2][y-2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::GREEN1) && checkBlock(x+1, y-1, BlockType::GREEN2) && checkBlock(x+2, y-2, BlockType::GREEN3)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y-1].clearBlock();
+                    blocks[x+2][y-2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::GREEN3) && checkBlock(x+1, y-1, BlockType::GREEN2) && checkBlock(x+2, y-2, BlockType::GREEN1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y-1].clearBlock();
+                    blocks[x+2][y-2].clearBlock();
+                    return true;
+                }
+                if(checkBlock(x,y, BlockType::BLUE1) && checkBlock(x+1, y-1, BlockType::BLUE2) && checkBlock(x+2, y-2, BlockType::BLUE3)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y-1].clearBlock();
+                    blocks[x+2][y-2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y, BlockType::BLUE3) && checkBlock(x+1, y-1, BlockType::BLUE2) && checkBlock(x+2, y-2, BlockType::BLUE1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y-1].clearBlock();
+                    blocks[x+2][y-2].clearBlock();
+                    return true;
+                }
             }
         }
         return false;
