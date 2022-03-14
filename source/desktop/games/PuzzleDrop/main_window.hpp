@@ -43,6 +43,7 @@ private:
     QImage loadAndScale(QString filename);
     int difficulty_level;
     bool game_started;
+    bool first_game;
 };
 
 

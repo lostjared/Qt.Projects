@@ -70,6 +70,7 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
 
     background_proc = new QTimer(this);
     connect(background_proc, SIGNAL(timeout()), this, SLOT(proc()));
+    first_game = true;
 }
 
 QImage GameWindow::loadAndScale(QString filename) {
@@ -107,16 +108,28 @@ void GameWindow::paintEvent(QPaintEvent *e) {
 
     if(game_started == false) {
         QFont font = paint.font();
+        QPen pen = paint.pen();
+        pen.setColor(QColor(QRgb(0xFFFFFF)));
         font.setPixelSize(70);
         font.setBold(true);
         paint.setFont(font);
-        QPen pen = paint.pen();
-        pen.setColor(QColor(QRgb(0xFFFFFF)));
         paint.setPen(pen);
         paint.drawText(425, 150, "Puzzle Drop");
         paint.drawText(235, 250, "Click New Game in Menu");
+    } 
+    if(game_started == true || first_game == false) {
+        QFont font = paint.font();
+        QPen pen = paint.pen();
+        pen.setColor(QColor(QRgb(0xFFFFFF)));
+        font.setPixelSize(25);
+        font.setBold(true);
+        paint.setFont(font);
+        paint.setPen(pen);
+        QString text;
+        QTextStream stream(&text);
+        stream << "Level: " << grid.level() << " Lines: " << grid.currentLines();
+        paint.drawText(25, 30, text);
     }
-
 }
 
 void GameWindow::keyPressEvent(QKeyEvent *ke) {
@@ -170,6 +183,7 @@ void GameWindow::gameOver() {
     background_proc->stop();
     timer->stop();
     game_started = false;
+    first_game = false;
 }
   
 

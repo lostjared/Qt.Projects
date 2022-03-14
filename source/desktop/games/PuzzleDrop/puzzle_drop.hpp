@@ -76,7 +76,8 @@ namespace puzzle {
         void keyShiftDown();
         void keyRotateLeft();
         void keyRotateRight();
-         int level() const;
+        int level() const;
+        int currentLines() const;
         void levelNext();
         bool procMoveDown();
         bool procBlocks();
@@ -91,6 +92,7 @@ namespace puzzle {
         bool checkPiece(Piece &p, int x, int y);
         void setPiece();
         bool checkBlock(int x, int y, const BlockType &type);
+        void addScore();
     };
 
 }

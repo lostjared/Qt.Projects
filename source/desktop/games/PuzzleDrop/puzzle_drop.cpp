@@ -329,7 +329,7 @@ namespace puzzle {
             for(int y = 0; y < grid_h; ++y) {
 
                if(checkBlock(x,y,BlockType::RED1) && checkBlock(x,y+1,BlockType::RED2) && checkBlock(x,y+2,BlockType::RED3)) {
-                   lines++;
+                   addScore();
                    blocks[x][y].clearBlock();
                    blocks[x][y+1].clearBlock();
                    blocks[x][y+2].clearBlock();
@@ -337,7 +337,7 @@ namespace puzzle {
                }
 
                 if(checkBlock(x,y,BlockType::RED3) && checkBlock(x,y+1,BlockType::RED2) && checkBlock(x,y+2,BlockType::RED1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                      blocks[x][y+1].clearBlock();
                     blocks[x][y+2].clearBlock();
@@ -345,7 +345,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y,BlockType::GREEN1) && checkBlock(x,y+1,BlockType::GREEN2) && checkBlock(x,y+2,BlockType::GREEN3)) {
-                       lines++;
+                       addScore();
                         blocks[x][y].clearBlock();
                         blocks[x][y+1].clearBlock();
                         blocks[x][y+2].clearBlock();
@@ -353,7 +353,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y,BlockType::GREEN3) && checkBlock(x,y+1,BlockType::GREEN2) && checkBlock(x,y+2,BlockType::GREEN1)) {
-                       lines++;
+                       addScore();
                        blocks[x][y].clearBlock();
                        blocks[x][y+1].clearBlock();
                        blocks[x][y+2].clearBlock();
@@ -361,7 +361,7 @@ namespace puzzle {
                 }
             
                 if(checkBlock(x,y,BlockType::BLUE1) && checkBlock(x,y+1,BlockType::BLUE2) && checkBlock(x,y+2,BlockType::BLUE3)) {
-                        lines++;
+                        addScore();
                         blocks[x][y].clearBlock();
                         blocks[x][y+1].clearBlock();
                         blocks[x][y+2].clearBlock();
@@ -369,7 +369,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y,BlockType::BLUE3) && checkBlock(x,y+1,BlockType::BLUE2) && checkBlock(x,y+2,BlockType::BLUE1)) {
-                       lines++;
+                       addScore();
                        blocks[x][y].clearBlock();
                        blocks[x][y+1].clearBlock();
                        blocks[x][y+2].clearBlock();
@@ -379,7 +379,7 @@ namespace puzzle {
                 // grid across
 
                  if(checkBlock(x,y,BlockType::RED1) && checkBlock(x+1,y,BlockType::RED2) && checkBlock(x+2,y,BlockType::RED3)) {
-                   lines++;
+                   addScore();
                    blocks[x][y].clearBlock();
                    blocks[x+1][y].clearBlock();
                    blocks[x+2][y].clearBlock();
@@ -387,7 +387,7 @@ namespace puzzle {
                }
 
                 if(checkBlock(x,y,BlockType::RED3) && checkBlock(x+1,y,BlockType::RED2) && checkBlock(x+2,y,BlockType::RED1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y].clearBlock();
                     blocks[x+2][y].clearBlock();
@@ -395,7 +395,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y,BlockType::GREEN1) && checkBlock(x+1,y,BlockType::GREEN2) && checkBlock(x+2,y,BlockType::GREEN3)) {
-                       lines++;
+                       addScore();
                        blocks[x][y].clearBlock();
                        blocks[x+1][y].clearBlock();
                        blocks[x+2][y].clearBlock();
@@ -403,7 +403,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y,BlockType::GREEN3) && checkBlock(x+1,y,BlockType::GREEN2) && checkBlock(x+2,y,BlockType::GREEN1)) {
-                       lines++;
+                       addScore();
                        blocks[x][y].clearBlock();
                        blocks[x+1][y].clearBlock();
                        blocks[x+2][y].clearBlock();
@@ -411,7 +411,7 @@ namespace puzzle {
                 }
             
                 if(checkBlock(x,y,BlockType::BLUE1) && checkBlock(x+1,y,BlockType::BLUE2) && checkBlock(x+2,y,BlockType::BLUE3)) {
-                        lines++;
+                        addScore();
                         blocks[x][y].clearBlock();
                         blocks[x+1][y].clearBlock();
                         blocks[x+2][y].clearBlock();
@@ -419,7 +419,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y,BlockType::BLUE3) && checkBlock(x+1,y,BlockType::BLUE2) && checkBlock(x+2,y,BlockType::BLUE1)) {
-                       lines++;
+                       addScore();
                        blocks[x][y].clearBlock();
                        blocks[x+1][y].clearBlock();
                        blocks[x+2][y].clearBlock();
@@ -428,7 +428,7 @@ namespace puzzle {
 
                 // grid digaonal
                 if(checkBlock(x,y, BlockType::RED1) && checkBlock(x+1, y+1, BlockType::RED2) && checkBlock(x+2, y+2, BlockType::RED3)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y+1].clearBlock();
                     blocks[x+2][y+2].clearBlock();
@@ -436,7 +436,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::RED3) && checkBlock(x+1, y+1, BlockType::RED2) && checkBlock(x+2, y+2, BlockType::RED1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y+1].clearBlock();
                     blocks[x+2][y+2].clearBlock();
@@ -444,7 +444,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::GREEN1) && checkBlock(x+1, y+1, BlockType::GREEN2) && checkBlock(x+2, y+2, BlockType::GREEN3)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y+1].clearBlock();
                     blocks[x+2][y+2].clearBlock();
@@ -452,7 +452,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::GREEN3) && checkBlock(x+1, y+1, BlockType::GREEN2) && checkBlock(x+2, y+2, BlockType::GREEN1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y+1].clearBlock();
                     blocks[x+2][y+2].clearBlock();
@@ -460,7 +460,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::BLUE1) && checkBlock(x+1, y+1, BlockType::BLUE2) && checkBlock(x+2, y+2, BlockType::BLUE3)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y+1].clearBlock();
                     blocks[x+2][y+2].clearBlock();
@@ -468,7 +468,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::BLUE3) && checkBlock(x+1, y+1, BlockType::BLUE2) && checkBlock(x+2, y+2, BlockType::BLUE1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y+1].clearBlock();
                     blocks[x+2][y+2].clearBlock();
@@ -476,7 +476,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::RED1) && checkBlock(x+1, y-1, BlockType::RED2) && checkBlock(x+2, y-2, BlockType::RED3)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y-1].clearBlock();
                     blocks[x+2][y-2].clearBlock();
@@ -484,7 +484,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::RED3) && checkBlock(x+1, y-1, BlockType::RED2) && checkBlock(x+2, y-2, BlockType::RED1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y-1].clearBlock();
                     blocks[x+2][y-2].clearBlock();
@@ -492,7 +492,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::GREEN1) && checkBlock(x+1, y-1, BlockType::GREEN2) && checkBlock(x+2, y-2, BlockType::GREEN3)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y-1].clearBlock();
                     blocks[x+2][y-2].clearBlock();
@@ -500,14 +500,14 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::GREEN3) && checkBlock(x+1, y-1, BlockType::GREEN2) && checkBlock(x+2, y-2, BlockType::GREEN1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y-1].clearBlock();
                     blocks[x+2][y-2].clearBlock();
                     return true;
                 }
                 if(checkBlock(x,y, BlockType::BLUE1) && checkBlock(x+1, y-1, BlockType::BLUE2) && checkBlock(x+2, y-2, BlockType::BLUE3)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y-1].clearBlock();
                     blocks[x+2][y-2].clearBlock();
@@ -515,7 +515,7 @@ namespace puzzle {
                 }
 
                 if(checkBlock(x,y, BlockType::BLUE3) && checkBlock(x+1, y-1, BlockType::BLUE2) && checkBlock(x+2, y-2, BlockType::BLUE1)) {
-                    lines++;
+                    addScore();
                     blocks[x][y].clearBlock();
                     blocks[x+1][y-1].clearBlock();
                     blocks[x+2][y-2].clearBlock();
@@ -575,4 +575,16 @@ namespace puzzle {
     bool Grid::gameOver() const {
         return game_over;
     }
+    
+    void Grid::addScore() {
+        lines++;
+        if((lines%6)==0) {
+            levelNext();
+        }
+    }
+
+    int Grid::currentLines() const {
+        return lines;
+    }
+
 }
