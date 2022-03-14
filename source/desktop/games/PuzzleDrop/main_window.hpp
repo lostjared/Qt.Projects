@@ -29,6 +29,7 @@ public slots:
     void setMedium();
     void setHard();
     void newGame();
+    void showAbout();
   
 private:
     puzzle::Grid grid;
@@ -36,9 +37,9 @@ private:
     QImage blocks[9];
     QImage background[8];
     QMenu *file_menu, *options_menu, *help_menu, *diff_menu;
-    
     QAction *file_menu_new;
     QAction *diff_easy, *diff_med, *diff_hard;
+    QAction *help_about;
     QImage loadAndScale(QString filename);
     int difficulty_level;
     bool game_started;

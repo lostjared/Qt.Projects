@@ -1,5 +1,6 @@
 #include "main_window.hpp"
 #include<QPainter>
+#include<QMessageBox>
 
 using puzzle::BlockType;
 
@@ -56,6 +57,12 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     connect(diff_hard, SIGNAL(triggered()), this, SLOT(setHard()));
     difficulty_level = 0;
     game_started = false;
+    
+    help_about = new QAction(tr("&About"), this);
+    connect(help_about, SIGNAL(triggered()), this, SLOT(showAbout()));
+
+    help_menu->addAction(help_about);
+
     connect(file_menu_new, SIGNAL(triggered()), this, SLOT(newGame()));
 
     timer = new QTimer(this);
@@ -209,3 +216,12 @@ void GameWindow::setHard() {
     difficulty_level = 2;
 }
 
+void GameWindow::showAbout() {
+    QMessageBox box;
+    box.setText("(C) 2022 LostSideDead Software\n Programmed by Jared Bruni\n");
+    QPixmap pix = QPixmap(":/img/red3.png");
+    box.setIconPixmap(pix.scaled(QSize(64, 64)));
+    box.setWindowTitle(tr("About Puzzle Drop"));
+    box.exec();
+
+}
