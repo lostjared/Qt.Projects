@@ -61,6 +61,10 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     help_about = new QAction(tr("&About"), this);
     connect(help_about, SIGNAL(triggered()), this, SLOT(showAbout()));
 
+    help_howto = new QAction(tr("&How to Play"), this);
+    connect(help_howto, SIGNAL(triggered()), this, SLOT(showHowTo()));
+    
+    help_menu->addAction(help_howto);
     help_menu->addAction(help_about);
 
     connect(file_menu_new, SIGNAL(triggered()), this, SLOT(newGame()));
@@ -128,7 +132,7 @@ void GameWindow::paintEvent(QPaintEvent *e) {
         QString text;
         QTextStream stream(&text);
         stream << "Level: " << grid.level() << " Lines: " << grid.currentLines();
-        paint.drawText(25, 30, text);
+        paint.drawText(25, 60, text);
     }
 }
 
@@ -245,10 +249,19 @@ void GameWindow::setHard() {
 
 void GameWindow::showAbout() {
     QMessageBox box;
-    box.setText("(C) 2022 LostSideDead Software\n Programmed by Jared Bruni\n");
+    box.setText(tr("(C) 2022 LostSideDead Software\n Programmed by Jared Bruni\n"));
     QPixmap pix = QPixmap(":/img/red3.png");
     box.setIconPixmap(pix.scaled(QSize(64, 64)));
     box.setWindowTitle(tr("About Puzzle Drop"));
     box.exec();
 
+}
+
+void GameWindow::showHowTo() {
+    QMessageBox box;
+    box.setText(tr("You play by moving the blocks left and right with the arrow keys. You press A and S to shift the blocks, Z and X to rotate them Line up the pattern of the same color 1 2 3, or 3 2 1 Either horizontal, vertical, or diagonal line Clear as many lines as you can."));
+    QPixmap pix = QPixmap(":/img/blue3.png");
+    box.setIconPixmap(pix.scaled(QSize(64, 64)));
+    box.setWindowTitle(tr("How to Play"));
+    box.exec();
 }
