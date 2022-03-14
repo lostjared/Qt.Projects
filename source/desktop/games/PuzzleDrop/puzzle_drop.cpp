@@ -5,16 +5,17 @@ namespace puzzle {
 
 // *** Block
 
-    Block::Block() : x{0}, y{0}, type{BlockType::BLOCK_NULL} {}
+    Block::Block() : x{0}, y{0}, type{BlockType::BLOCK_NULL}, clear{0} {}
 
-    Block::Block(int xx, int yy, BlockType t) : x{xx}, y{yy}, type{t} {}
+    Block::Block(int xx, int yy, BlockType t) : x{xx}, y{yy}, type{t}, clear{0} {}
 
-    Block::Block(const Block &b) : x{b.x}, y{b.y}, type{b.type} {}
+    Block::Block(const Block &b) : x{b.x}, y{b.y}, type{b.type}, clear{b.clear} {}
     
     Block &Block::operator=(const Block &b) {
         x = b.x;
         y = b.y;
         type = b.type;
+        clear = b.clear;
         return *this;
     }
 
@@ -22,6 +23,7 @@ namespace puzzle {
         x = b.x;
         y = b.y;
         type = b.type;
+        clear = b.clear;
         return *this;
     }
 
@@ -54,6 +56,17 @@ namespace puzzle {
     BlockType Block::getType() const {
         return type;
     }
+
+    int &Block::clearValue() {
+        return clear;
+    }
+
+    void Block::clearBlock() {
+        type = BlockType::BLOCK_CLEAR;
+        clear = 1;
+    }
+
+
 
     std::ostream &operator<<(std::ostream &out, Block &b) {
         out << "Block [ x:" << b.x << " y: " << b.y << "]  ";
@@ -197,6 +210,7 @@ namespace puzzle {
         }
         clearGrid();
         piece.newPiece(w/2, 0);
+
     }
 
     void Grid::clearGrid() {
@@ -206,6 +220,7 @@ namespace puzzle {
             }
         }
         game_level = 1;
+        lines = 0;
     }
     
     Grid::~Grid() {
@@ -303,7 +318,109 @@ namespace puzzle {
 
 
     bool Grid::procBlocks() {
-    
+
+        for(int x = 0; x < grid_w; ++x) {
+            for(int y = 0; y < grid_h; ++y) {
+
+               if(checkBlock(x,y,BlockType::RED1) && checkBlock(x,y+1,BlockType::RED2) && checkBlock(x,y+2,BlockType::RED3)) {
+                   lines++;
+                   blocks[x][y].clearBlock();
+                   blocks[x][y+1].clearBlock();
+                   blocks[x][y+2].clearBlock();
+                   return true;
+               }
+
+                if(checkBlock(x,y,BlockType::RED3) && checkBlock(x,y+1,BlockType::RED2) && checkBlock(x,y+2,BlockType::RED1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                     blocks[x][y+1].clearBlock();
+                    blocks[x][y+2].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y,BlockType::GREEN1) && checkBlock(x,y+1,BlockType::GREEN2) && checkBlock(x,y+2,BlockType::GREEN3)) {
+                       lines++;
+                        blocks[x][y].clearBlock();
+                        blocks[x][y+1].clearBlock();
+                        blocks[x][y+2].clearBlock();
+                        return true;
+                }
+
+                if(checkBlock(x,y,BlockType::GREEN3) && checkBlock(x,y+1,BlockType::GREEN2) && checkBlock(x,y+2,BlockType::GREEN1)) {
+                       lines++;
+                       blocks[x][y].clearBlock();
+                       blocks[x][y+1].clearBlock();
+                       blocks[x][y+2].clearBlock();
+                       return true;
+                }
+            
+                if(checkBlock(x,y,BlockType::BLUE1) && checkBlock(x,y+1,BlockType::BLUE2) && checkBlock(x,y+2,BlockType::BLUE3)) {
+                        lines++;
+                        blocks[x][y].clearBlock();
+                        blocks[x][y+1].clearBlock();
+                        blocks[x][y+2].clearBlock();
+                       return true;
+                }
+
+                if(checkBlock(x,y,BlockType::BLUE3) && checkBlock(x,y+1,BlockType::BLUE2) && checkBlock(x,y+2,BlockType::BLUE1)) {
+                       lines++;
+                       blocks[x][y].clearBlock();
+                       blocks[x][y+1].clearBlock();
+                       blocks[x][y+2].clearBlock();
+                       return true;
+                }
+
+                // grid across
+
+                 if(checkBlock(x,y,BlockType::RED1) && checkBlock(x+1,y,BlockType::RED2) && checkBlock(x+2,y,BlockType::RED3)) {
+                   lines++;
+                   blocks[x][y].clearBlock();
+                   blocks[x+1][y].clearBlock();
+                   blocks[x+2][y].clearBlock();
+                   return true;
+               }
+
+                if(checkBlock(x,y,BlockType::RED3) && checkBlock(x+1,y,BlockType::RED2) && checkBlock(x+2,y,BlockType::RED1)) {
+                    lines++;
+                    blocks[x][y].clearBlock();
+                    blocks[x+1][y].clearBlock();
+                    blocks[x+2][y].clearBlock();
+                    return true;
+                }
+
+                if(checkBlock(x,y,BlockType::GREEN1) && checkBlock(x+1,y,BlockType::GREEN2) && checkBlock(x+2,y,BlockType::GREEN3)) {
+                       lines++;
+                       blocks[x][y].clearBlock();
+                       blocks[x+1][y].clearBlock();
+                       blocks[x+2][y].clearBlock();
+                       return true;
+                }
+
+                if(checkBlock(x,y,BlockType::GREEN3) && checkBlock(x+1,y,BlockType::GREEN2) && checkBlock(x+2,y,BlockType::GREEN1)) {
+                       lines++;
+                       blocks[x][y].clearBlock();
+                       blocks[x+1][y].clearBlock();
+                       blocks[x+2][y].clearBlock();
+                      return true;
+                }
+            
+                if(checkBlock(x,y,BlockType::BLUE1) && checkBlock(x+1,y,BlockType::BLUE2) && checkBlock(x+2,y,BlockType::BLUE3)) {
+                        lines++;
+                        blocks[x][y].clearBlock();
+                        blocks[x+1][y].clearBlock();
+                        blocks[x+2][y].clearBlock();
+                       return true;
+                }
+
+                if(checkBlock(x,y,BlockType::BLUE3) && checkBlock(x+1,y,BlockType::BLUE2) && checkBlock(x+2,y,BlockType::BLUE1)) {
+                       lines++;
+                       blocks[x][y].clearBlock();
+                       blocks[x+1][y].clearBlock();
+                       blocks[x+2][y].clearBlock();
+                       return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -320,8 +437,29 @@ namespace puzzle {
                 }
             }
         }
+        bool update = false;
+        for(int x = 0; x < grid_w; ++x) {
+            for(int y = 0; y < grid_h; ++y) {
+                Block *b = grid(x,y);
+                if(b != nullptr && b->getType() == BlockType::BLOCK_CLEAR) {
+                    b->clearValue() += 1;
+                    if(b->clearValue() > 50) {
+                        *b = BlockType::BLOCK_NULL;
+                    }
+                    update = true;
+                }
+            }
+        }
+        return update;
+    }
+
+    bool Grid::checkBlock(int x, int y, const BlockType &type) {
+        Block *b = grid(x,y);
+        if(b != nullptr && b->getType() == type)
+            return true;
         return false;
     }
+
 
     int Grid::level() const {
         return game_level;

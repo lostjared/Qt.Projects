@@ -16,6 +16,7 @@ namespace puzzle {
     class Block {
         int x,y;
         BlockType type;
+        int clear;
     public:
         Block();
         Block(const Block &b);
@@ -29,6 +30,8 @@ namespace puzzle {
         BlockType getType() const;
         bool operator==(const Block &b);
         bool operator==(const BlockType &type);
+        int &clearValue();
+        void clearBlock();
         friend class Piece;
         friend std::ostream &operator<<(std::ostream &out, Block &b);
     };
@@ -82,9 +85,11 @@ namespace puzzle {
         Piece piece;
         int grid_w, grid_h;
         int game_level;
+        int lines;
         
         bool checkPiece(Piece &p, int x, int y);
         void setPiece();
+        bool checkBlock(int x, int y, const BlockType &type);
     };
 
 }

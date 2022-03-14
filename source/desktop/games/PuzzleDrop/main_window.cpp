@@ -82,9 +82,13 @@ void GameWindow::paintEvent(QPaintEvent *e) {
             puzzle::Block *b = grid.grid(x,y);
             if(b != 0 && b->getType() == puzzle::BlockType::BLOCK_NULL) {
                 paint.fillRect(QRect(x*BLOCK_WIDTH+1, y*BLOCK_HEIGHT+1, BLOCK_WIDTH-1, BLOCK_HEIGHT-1), QBrush("#000000"));
-            } else {
+            }
+             else {
                 //paint.fillRect(QRect(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT), blockToBrush(b->getType()));
-                paint.drawImage(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, blocks[static_cast<int>(b->getType())-2]);
+                int image = static_cast<int>(b->getType())-2;
+                if(b->getType() == BlockType::BLOCK_CLEAR)
+                    image = (rand()%9);
+                paint.drawImage(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, blocks[image]);
             }
         }
     }
