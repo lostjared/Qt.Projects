@@ -80,13 +80,14 @@ namespace puzzle {
         void levelNext();
         bool procMoveDown();
         bool procBlocks();
+        bool gameOver() const;
     protected:
         Block **blocks;
         Piece piece;
         int grid_w, grid_h;
         int game_level;
         int lines;
-        
+        bool game_over;
         bool checkPiece(Piece &p, int x, int y);
         void setPiece();
         bool checkBlock(int x, int y, const BlockType &type);

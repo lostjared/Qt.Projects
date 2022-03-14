@@ -221,6 +221,7 @@ namespace puzzle {
         }
         game_level = 1;
         lines = 0;
+        game_over = false;
     }
     
     Grid::~Grid() {
@@ -313,7 +314,12 @@ namespace puzzle {
             if(b != nullptr) {
                 *b = piece.blocks[i].getType();
             }
+            if(py == 0) {
+                game_over = true;
+            }
         }
+
+        
     }
 
 
@@ -566,4 +572,7 @@ namespace puzzle {
             ++game_level;
     }
 
+    bool Grid::gameOver() const {
+        return game_over;
+    }
 }

@@ -127,6 +127,12 @@ void GameWindow::keyPressEvent(QKeyEvent *ke) {
     if(game_started == false)
         return;
 
+    if(grid.gameOver() == true) {
+        game_started = false;
+        gameOver();
+        repaint();
+        return;
+    }
     
     switch(ke->key()) {
         case Qt::Key_Left:
@@ -170,6 +176,11 @@ void GameWindow::gameOver() {
 void GameWindow::update() {
     grid.keyDown();
     repaint();
+    if(grid.gameOver() == true) {
+        game_started = false;
+        gameOver();
+        repaint();
+    }
 }
 
 void GameWindow::proc() {
@@ -187,6 +198,8 @@ void GameWindow::newGame() {
     else if(difficulty_level == 2)
         interval = 500;
     
+    grid.clearGrid();
+
     game_started = true;
 
     timer->setInterval(interval);
