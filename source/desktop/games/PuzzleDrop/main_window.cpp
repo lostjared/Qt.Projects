@@ -206,6 +206,7 @@ void GameWindow::gameOver() {
     timer->stop();
     game_started = false;
     first_game = false;
+    diff_menu->setEnabled(true);
 }
   
 
@@ -232,15 +233,13 @@ void GameWindow::newGame() {
         interval = 750;
     else if(difficulty_level == 2)
         interval = 500;
-    
     grid.clearGrid();
-
     game_started = true;
-
     timer->setInterval(interval);
     background_proc->setInterval(10);
     timer->start();
     background_proc->start();
+    diff_menu->setEnabled(false);
 }
 
 void GameWindow::setEasy() {
