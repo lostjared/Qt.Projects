@@ -10,7 +10,7 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     srand(static_cast<unsigned int>(time(0)));
     setWindowTitle("PuzzleDrop");
     setWindowIcon(QPixmap(":/img/green3.png").scaled(32, 32));
-    setFixedSize(1280, 720);
+    setFixedSize(1280, 745);
     
     blocks[0] = QImage(":/img/red1.png");
     blocks[1] = QImage(":/img/red2.png");
@@ -83,7 +83,7 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
 
 QImage GameWindow::loadAndScale(QString filename) {
     QImage img = QImage(filename);
-    return img.scaled(1280, 720);
+    return img.scaled(1280, 745);
 }
 
 
@@ -91,20 +91,22 @@ void GameWindow::paintEvent(QPaintEvent *e) {
     Q_UNUSED(e);
     QPainter paint(this);
 
+    int offset_y = 25;
+
     paint.drawImage(0, 0, background[grid.level()-1]);
     
     for(int x = 0; x < grid.getWidth(); ++x) {
         for(int y = 0; y < grid.getHeight(); ++y) {
             puzzle::Block *b = grid.grid(x,y);
             if(b != 0 && b->getType() == puzzle::BlockType::BLOCK_NULL) {
-                paint.fillRect(QRect(x*BLOCK_WIDTH+1, y*BLOCK_HEIGHT+1, BLOCK_WIDTH-1, BLOCK_HEIGHT-1), QBrush("#000000"));
+                paint.fillRect(QRect(x*BLOCK_WIDTH+1, offset_y+(y*BLOCK_HEIGHT+1), BLOCK_WIDTH-1, BLOCK_HEIGHT-1), QBrush("#000000"));
             }
              else {
                 //paint.fillRect(QRect(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT), blockToBrush(b->getType()));
                 int image = static_cast<int>(b->getType())-2;
                 if(b->getType() == BlockType::BLOCK_CLEAR || b->getType() == BlockType::MATCH)
                     image = (rand()%9);
-                paint.drawImage(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, blocks[image]);
+                paint.drawImage(x*BLOCK_WIDTH, offset_y+(y*BLOCK_HEIGHT), blocks[image]);
             }
         }
     }
@@ -122,9 +124,9 @@ void GameWindow::paintEvent(QPaintEvent *e) {
     if(p.blocks[2] == BlockType::MATCH)
         b3 = rand()%9;
 
-    paint.drawImage(p.blocks[0].getX()*BLOCK_WIDTH, p.blocks[0].getY()*BLOCK_HEIGHT, blocks[b1]);
-    paint.drawImage(p.blocks[1].getX()*BLOCK_WIDTH, p.blocks[1].getY()*BLOCK_HEIGHT, blocks[b2]);
-    paint.drawImage(p.blocks[2].getX()*BLOCK_WIDTH, p.blocks[2].getY()*BLOCK_HEIGHT, blocks[b3]);
+    paint.drawImage(p.blocks[0].getX()*BLOCK_WIDTH, offset_y+(p.blocks[0].getY()*BLOCK_HEIGHT), blocks[b1]);
+    paint.drawImage(p.blocks[1].getX()*BLOCK_WIDTH, offset_y+(p.blocks[1].getY()*BLOCK_HEIGHT), blocks[b2]);
+    paint.drawImage(p.blocks[2].getX()*BLOCK_WIDTH, offset_y+(p.blocks[2].getY()*BLOCK_HEIGHT), blocks[b3]);
 
     if(game_started == false) {
         QFont font = paint.font();
@@ -134,8 +136,8 @@ void GameWindow::paintEvent(QPaintEvent *e) {
         font.setBold(true);
         paint.setFont(font);
         paint.setPen(pen);
-        paint.drawText(425, 150, "Puzzle Drop");
-        paint.drawText(235, 250, "Click New Game in Menu");
+        paint.drawText(425, offset_y+150, "Puzzle Drop");
+        paint.drawText(235, offset_y+250, "Click New Game in Menu");
     } 
     if(game_started == true || first_game == false) {
         QFont font = paint.font();
@@ -148,7 +150,7 @@ void GameWindow::paintEvent(QPaintEvent *e) {
         QString text;
         QTextStream stream(&text);
         stream << "Level: " << grid.level() << " Lines: " << grid.currentLines();
-        paint.drawText(25, 60, text);
+        paint.drawText(25, offset_y+60, text);
     }
 }
 
