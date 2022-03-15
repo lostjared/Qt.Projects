@@ -269,9 +269,9 @@ void GameWindow::showAbout() {
     box.setText(tr("(C) 2022 LostSideDead Software\n Programmed by Jared Bruni\n"));
     QPixmap pix = QPixmap(":/img/red3.png");
     box.setIconPixmap(pix.scaled(QSize(64, 64)));
+    box.setWindowIcon(QPixmap(":/img'red1.png").scaled(32, 32));
     box.setWindowTitle(tr("About Puzzle Drop"));
     box.exec();
-
 }
 
 void GameWindow::showHowTo() {
@@ -279,6 +279,7 @@ void GameWindow::showHowTo() {
     box.setText(tr("You play by moving the blocks left and right with the arrow keys. You press A and S to shift the blocks, Z and X to rotate them Line up the pattern of the same color 1 2 3, or 3 2 1 Either horizontal, vertical, or diagonal line. There is a wildcard block that flashes different colors, it will match any block. Clear as many lines as you can."));
     QPixmap pix = QPixmap(":/img/blue3.png");
     box.setIconPixmap(pix.scaled(QSize(64, 64)));
+    box.setWindowIcon(QPixmap(":/img'red1.png").scaled(32, 32));
     box.setWindowTitle(tr("How to Play"));
     box.exec();
 }
