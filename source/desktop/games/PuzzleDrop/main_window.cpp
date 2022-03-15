@@ -9,6 +9,7 @@ using puzzle::BlockType;
 GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     srand(static_cast<unsigned int>(time(0)));
     setWindowTitle("PuzzleDrop");
+    setWindowIcon(QPixmap(":/img/green3.png").scaled(32, 32));
     setFixedSize(1280, 720);
     
     blocks[0] = QImage(":/img/red1.png");
