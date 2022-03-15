@@ -1,10 +1,13 @@
 #include "main_window.hpp"
 #include<QPainter>
 #include<QMessageBox>
+#include<cstdlib>
+#include<ctime>
 
 using puzzle::BlockType;
 
 GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
+    srand(static_cast<unsigned int>(time(0)));
     setWindowTitle("PuzzleDrop");
     setFixedSize(1280, 720);
     
@@ -98,7 +101,7 @@ void GameWindow::paintEvent(QPaintEvent *e) {
              else {
                 //paint.fillRect(QRect(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT), blockToBrush(b->getType()));
                 int image = static_cast<int>(b->getType())-2;
-                if(b->getType() == BlockType::BLOCK_CLEAR)
+                if(b->getType() == BlockType::BLOCK_CLEAR || b->getType() == BlockType::MATCH)
                     image = (rand()%9);
                 paint.drawImage(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, blocks[image]);
             }
@@ -106,9 +109,21 @@ void GameWindow::paintEvent(QPaintEvent *e) {
     }
     
     puzzle::Piece &p = grid.getPiece();
-    paint.drawImage(p.blocks[0].getX()*BLOCK_WIDTH, p.blocks[0].getY()*BLOCK_HEIGHT, blocks[static_cast<int>(p.blocks[0].getType())-2]);
-    paint.drawImage(p.blocks[1].getX()*BLOCK_WIDTH, p.blocks[1].getY()*BLOCK_HEIGHT, blocks[static_cast<int>(p.blocks[1].getType())-2]);
-    paint.drawImage(p.blocks[2].getX()*BLOCK_WIDTH, p.blocks[2].getY()*BLOCK_HEIGHT, blocks[static_cast<int>(p.blocks[2].getType())-2]);
+
+    int b1 = static_cast<int>(p.blocks[0].getType())-2;
+    int b2 = static_cast<int>(p.blocks[1].getType())-2;
+    int b3 = static_cast<int>(p.blocks[2].getType())-2;
+
+    if(p.blocks[0] == BlockType::MATCH)
+        b1 = rand()%9;
+    if(p.blocks[1] == BlockType::MATCH)
+        b2 = rand()%9;
+    if(p.blocks[2] == BlockType::MATCH)
+        b3 = rand()%9;
+
+    paint.drawImage(p.blocks[0].getX()*BLOCK_WIDTH, p.blocks[0].getY()*BLOCK_HEIGHT, blocks[b1]);
+    paint.drawImage(p.blocks[1].getX()*BLOCK_WIDTH, p.blocks[1].getY()*BLOCK_HEIGHT, blocks[b2]);
+    paint.drawImage(p.blocks[2].getX()*BLOCK_WIDTH, p.blocks[2].getY()*BLOCK_HEIGHT, blocks[b3]);
 
     if(game_started == false) {
         QFont font = paint.font();
@@ -202,10 +217,9 @@ void GameWindow::update() {
 }
 
 void GameWindow::proc() {
-    bool test_b1 = grid.procBlocks();
-    bool test_b2 = grid.procMoveDown();
-    if(test_b1 || test_b2)
-        repaint();  
+    grid.procBlocks();
+    grid.procMoveDown();
+    repaint();  
 }
   
 

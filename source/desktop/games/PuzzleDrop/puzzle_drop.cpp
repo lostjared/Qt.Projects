@@ -123,9 +123,9 @@ namespace puzzle {
     }
 
     void Piece::randColors() {
-        blocks[0].type = static_cast<BlockType>(2+rand()%9);
-        blocks[1].type = static_cast<BlockType>(2+rand()%9);
-        blocks[2].type = static_cast<BlockType>(2+rand()%9);
+        blocks[0].type = static_cast<BlockType>(2+rand()%10);
+        blocks[1].type = static_cast<BlockType>(2+rand()%10);
+        blocks[2].type = static_cast<BlockType>(2+rand()%10);
     }
 
     void Piece::shift(Direction dir) {
@@ -557,7 +557,7 @@ namespace puzzle {
 
     bool Grid::checkBlock(int x, int y, const BlockType &type) {
         Block *b = grid(x,y);
-        if(b != nullptr && b->getType() == type)
+        if(b != nullptr && (b->getType() == type || b->getType() == BlockType::MATCH))
             return true;
         return false;
     }
