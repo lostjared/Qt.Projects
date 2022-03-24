@@ -11,7 +11,6 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     setWindowTitle("PuzzleDrop");
     setWindowIcon(QPixmap(":/img/green3.png").scaled(32, 32));
     setFixedSize(1280, 745);
-    
     blocks[0] = QImage(":/img/red1.png");
     blocks[1] = QImage(":/img/red2.png");
     blocks[2] = QImage(":/img/red3.png");
@@ -21,7 +20,6 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     blocks[6] = QImage(":/img/blue1.png");
     blocks[7] = QImage(":/img/blue2.png");
     blocks[8] = QImage(":/img/blue3.png");
-
     background[0] = loadAndScale(":/img/level1.png");
     background[1] = loadAndScale(":/img/level2.png");
     background[2] = loadAndScale(":/img/level3.png");
@@ -30,52 +28,38 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     background[5] = loadAndScale(":/img/level6.png");
     background[6] = loadAndScale(":/img/level7.png");
     background[7] = loadAndScale(":/img/level8.png");
-    
     file_menu = menuBar()->addMenu(tr("&File"));
     options_menu = menuBar()->addMenu(tr("&Options"));
     help_menu = menuBar()->addMenu(tr("&Help"));
-    
     file_menu_new = new QAction(tr("&New Game"), this);
     file_menu->addAction(file_menu_new);
-    
     diff_menu = options_menu->addMenu(tr("Difficulty"));
-    
     diff_easy = new QAction(tr("Easy"), this);
     diff_med = new QAction(tr("Medium"), this);
     diff_hard = new QAction(tr("Hard"), this);
-    
     diff_easy->setCheckable(true);
     diff_easy->setChecked(true);
     diff_med->setCheckable(true);
     diff_med->setChecked(false);
     diff_hard->setCheckable(true);
     diff_hard->setChecked(false);
-    
     diff_menu->addAction(diff_easy);
     diff_menu->addAction(diff_med);
     diff_menu->addAction(diff_hard);
-    
-
     connect(diff_easy, SIGNAL(triggered()), this, SLOT(setEasy()));
     connect(diff_med, SIGNAL(triggered()), this, SLOT(setMedium()));
     connect(diff_hard, SIGNAL(triggered()), this, SLOT(setHard()));
     difficulty_level = 0;
     game_started = false;
-    
     help_about = new QAction(tr("&About"), this);
     connect(help_about, SIGNAL(triggered()), this, SLOT(showAbout()));
-
     help_howto = new QAction(tr("&How to Play"), this);
     connect(help_howto, SIGNAL(triggered()), this, SLOT(showHowTo()));
-    
     help_menu->addAction(help_howto);
     help_menu->addAction(help_about);
-
     connect(file_menu_new, SIGNAL(triggered()), this, SLOT(newGame()));
-
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-
     background_proc = new QTimer(this);
     connect(background_proc, SIGNAL(timeout()), this, SLOT(proc()));
     first_game = true;
@@ -90,11 +74,8 @@ QImage GameWindow::loadAndScale(QString filename) {
 void GameWindow::paintEvent(QPaintEvent *e) {
     Q_UNUSED(e);
     QPainter paint(this);
-
     int offset_y = 25;
-
     paint.drawImage(0, 0, background[grid.level()-1]);
-    
     for(int x = 0; x < grid.getWidth(); ++x) {
         for(int y = 0; y < grid.getHeight(); ++y) {
             puzzle::Block *b = grid.grid(x,y);
@@ -102,32 +83,26 @@ void GameWindow::paintEvent(QPaintEvent *e) {
                 paint.fillRect(QRect(x*BLOCK_WIDTH+1, offset_y+(y*BLOCK_HEIGHT+1), BLOCK_WIDTH-1, BLOCK_HEIGHT-1), QBrush("#000000"));
             }
              else {
-                //paint.fillRect(QRect(x*BLOCK_WIDTH, y*BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT), blockToBrush(b->getType()));
                 int image = static_cast<int>(b->getType())-2;
                 if(b->getType() == BlockType::BLOCK_CLEAR || b->getType() == BlockType::MATCH)
                     image = (rand()%9);
                 paint.drawImage(x*BLOCK_WIDTH, offset_y+(y*BLOCK_HEIGHT), blocks[image]);
             }
         }
-    }
-    
+    }  
     puzzle::Piece &p = grid.getPiece();
-
     int b1 = static_cast<int>(p.blocks[0].getType())-2;
     int b2 = static_cast<int>(p.blocks[1].getType())-2;
     int b3 = static_cast<int>(p.blocks[2].getType())-2;
-
     if(p.blocks[0] == BlockType::MATCH)
         b1 = rand()%9;
     if(p.blocks[1] == BlockType::MATCH)
         b2 = rand()%9;
     if(p.blocks[2] == BlockType::MATCH)
         b3 = rand()%9;
-
     paint.drawImage(p.blocks[0].getX()*BLOCK_WIDTH, offset_y+(p.blocks[0].getY()*BLOCK_HEIGHT), blocks[b1]);
     paint.drawImage(p.blocks[1].getX()*BLOCK_WIDTH, offset_y+(p.blocks[1].getY()*BLOCK_HEIGHT), blocks[b2]);
     paint.drawImage(p.blocks[2].getX()*BLOCK_WIDTH, offset_y+(p.blocks[2].getY()*BLOCK_HEIGHT), blocks[b3]);
-
     if(game_started == false) {
         QFont font = paint.font();
         QPen pen = paint.pen();
@@ -155,20 +130,16 @@ void GameWindow::paintEvent(QPaintEvent *e) {
 }
 
 void GameWindow::keyPressEvent(QKeyEvent *ke) {
-    
     if(ke->key() == Qt::Key_Escape)
         exit(0);
-
     if(game_started == false)
         return;
-
     if(grid.gameOver() == true) {
         game_started = false;
         gameOver();
         repaint();
         return;
     }
-    
     switch(ke->key()) {
         case Qt::Key_Left:
             grid.keyLeft();

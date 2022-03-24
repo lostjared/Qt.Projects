@@ -66,8 +66,6 @@ namespace puzzle {
         clear = 1;
     }
 
-
-
     std::ostream &operator<<(std::ostream &out, Block &b) {
         out << "Block [ x:" << b.x << " y: " << b.y << "]  ";
         return out;
