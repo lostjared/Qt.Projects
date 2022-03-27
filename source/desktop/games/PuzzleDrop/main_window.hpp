@@ -11,6 +11,7 @@
 
 #include"puzzle_drop.hpp"
 
+#define PUZZLEDROP_VERSION "v1.0.0"
 
 enum { BLOCK_WIDTH=64, BLOCK_HEIGHT=32 };
 

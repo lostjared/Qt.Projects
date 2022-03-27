@@ -236,7 +236,10 @@ void GameWindow::setHard() {
 
 void GameWindow::showAbout() {
     QMessageBox box;
-    box.setText(tr("(C) 2022 LostSideDead Software\n Programmed by Jared Bruni\n"));
+    QString info;
+    QTextStream stream(&info);
+    stream << tr("Puzzle Drop ") << PUZZLEDROP_VERSION << "\n" << tr("(C) 2022 LostSideDead Software\n Programmed by Jared Bruni\n");
+    box.setText(info);
     QPixmap pix = QPixmap(":/img/red3.png");
     box.setIconPixmap(pix.scaled(QSize(64, 64)));
     box.setWindowIcon(QPixmap(":/img'red1.png").scaled(32, 32));
