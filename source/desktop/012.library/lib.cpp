@@ -1,6 +1,9 @@
 #include"lib.h"
 #include<iostream>
+#include<QMessageBox>
 
 void testFunc() {
-    std::cout << "Hello World\n";
+    QMessageBox box;
+    box.setText(QObject::tr("Hello, World!"));
+    box.exec();
 }
