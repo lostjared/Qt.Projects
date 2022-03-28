@@ -35,6 +35,8 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     help_menu = menuBar()->addMenu(tr("&Help"));
     file_menu_new = new QAction(tr("&New Game"), this);
     file_menu->addAction(file_menu_new);
+    file_menu_scores = new QAction(tr("High Scores"), this);
+    file_menu->addAction(file_menu_scores);
     diff_menu = options_menu->addMenu(tr("Difficulty"));
     diff_easy = new QAction(tr("Easy"), this);
     diff_med = new QAction(tr("Medium"), this);
@@ -60,6 +62,7 @@ GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
     help_menu->addAction(help_howto);
     help_menu->addAction(help_about);
     connect(file_menu_new, SIGNAL(triggered()), this, SLOT(newGame()));
+    connect(file_menu_scores, SIGNAL(triggered()), this, SLOT(openScores()));
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
     background_proc = new QTimer(this);
@@ -213,6 +216,10 @@ void GameWindow::newGame() {
     timer->start();
     background_proc->start();
     diff_menu->setEnabled(false);
+}
+
+void GameWindow::openScores() {
+    scores_window->show();
 }
 
 void GameWindow::setEasy() {
