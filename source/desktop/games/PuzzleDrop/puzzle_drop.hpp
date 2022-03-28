@@ -6,7 +6,6 @@
 #include<iostream>
 #include<string>
 
-
 namespace puzzle {
 
     enum class BlockType { BLOCK_NULL=0, BLOCK_CLEAR, RED1, RED2, RED3, GREEN1, GREEN2, GREEN3, BLUE1, BLUE2, BLUE3, MATCH };

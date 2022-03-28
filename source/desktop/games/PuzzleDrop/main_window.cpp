@@ -3,6 +3,7 @@
 #include<QMessageBox>
 #include<cstdlib>
 #include<ctime>
+#include<QTextStream>
 
 using puzzle::BlockType;
 
