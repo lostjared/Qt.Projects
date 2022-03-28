@@ -15,6 +15,8 @@
 
 enum { BLOCK_WIDTH=64, BLOCK_HEIGHT=32 };
 
+class HighScores;
+
 class GameWindow : public QMainWindow {
   Q_OBJECT
 public:
@@ -46,6 +48,7 @@ private:
     int difficulty_level;
     bool game_started;
     bool first_game;
+    HighScores *scores_window;
 };
 
 

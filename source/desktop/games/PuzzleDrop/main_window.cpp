@@ -1,4 +1,5 @@
 #include "main_window.hpp"
+#include "high_scores.hpp"
 #include<QPainter>
 #include<QMessageBox>
 #include<cstdlib>
@@ -8,7 +9,7 @@
 using puzzle::BlockType;
 
 GameWindow::GameWindow() : grid(1280/BLOCK_WIDTH, 720/BLOCK_HEIGHT) {
-    srand(static_cast<unsigned int>(time(0)));
+    scores_window = new HighScores(this);
     setWindowTitle("PuzzleDrop");
     setWindowIcon(QPixmap(":/img/green3.png").scaled(32, 32));
     setFixedSize(1280, 745);
