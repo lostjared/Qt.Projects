@@ -1,6 +1,7 @@
 #include"main_window.hpp"
 #include<QPainter>
 #include<QMessageBox>
+#include<QTextStream>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setWindowTitle("Grid");
