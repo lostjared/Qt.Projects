@@ -13,7 +13,7 @@ bool Score::operator<(const Score &s) const {
 }
 
 HighScores::HighScores(QWidget *parent) : QDialog(parent), settings("LostSideDead", "PuzzleDrop") {
-    setFixedSize(640, 480);
+    setFixedSize(640, 500);
     setWindowTitle("High Scores Window");
     loadScores();
 }
@@ -25,7 +25,7 @@ HighScores::~HighScores() {
 void HighScores::paintEvent(QPaintEvent *e) {
     Q_UNUSED(e);
     QPainter paint(this);
-    paint.fillRect(0, 0, 640, 480, QBrush("#000000"));
+    paint.fillRect(0, 0, 640, 500, QBrush("#000000"));
     QFont font = paint.font();
     QPen pen = paint.pen();
     pen.setColor(QColor(QRgb(0xFF0000)));
