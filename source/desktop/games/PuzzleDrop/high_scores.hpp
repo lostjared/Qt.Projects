@@ -4,16 +4,12 @@
 #include<QDialog>
 #include<QSettings>
 
-
 struct Score {
     QString name;
     int lines;
     bool operator<(const Score &s) const;
 
 };
-
-
-
 
 class HighScores : public QDialog {
 Q_OBJECT

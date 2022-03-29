@@ -91,6 +91,12 @@ void HighScores::addScore(QString name, int lines) {
 bool HighScores::inputName(QString &text) {
     bool ok;
     text = QInputDialog::getText(this, tr("Input Your Name"),tr("Your name:"), QLineEdit::Normal,"", &ok);
+    std::string name = text.toStdString();
+    for(auto i = name.begin(); i != name.end(); ++i) {
+        if(*i == ':')
+            *i = ' ';
+    }
+    text = name.c_str();
     return ok;
 }
 
