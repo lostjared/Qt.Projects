@@ -2,6 +2,7 @@
 #include<QPainter>
 #include<QTextStream>
 #include<string>
+#include<QInputDialog>
 
 bool Score::operator<(const Score &s) const {
     if(s.lines < lines) return true;
@@ -80,3 +81,16 @@ void HighScores::saveScores() {
         settings.setValue(key1, value1);
     }
 }
+
+void HighScores::addScore(QString name, int lines) {
+    scores.push_back({name, lines});
+    std::sort(scores.begin(), scores.end());
+    saveScores();
+}
+
+bool HighScores::inputName(QString &text) {
+    bool ok;
+    text = QInputDialog::getText(this, tr("Input Your Name"),tr("Your name:"), QLineEdit::Normal,"", &ok);
+    return ok;
+}
+

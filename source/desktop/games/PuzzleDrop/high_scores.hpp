@@ -23,6 +23,8 @@ public:
     void paintEvent(QPaintEvent *e);
     void loadScores();
     void saveScores();
+    void addScore(QString name, int lines);
+    bool inputName(QString &text);
 private:
     std::vector<Score> scores;
     QSettings settings;

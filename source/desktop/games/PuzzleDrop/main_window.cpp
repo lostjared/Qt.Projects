@@ -183,6 +183,11 @@ void GameWindow::gameOver() {
     game_started = false;
     first_game = false;
     diff_menu->setEnabled(true);
+    QString name;
+    if(scores_window->inputName(name)) {
+        scores_window->addScore(name, grid.currentLines());
+        scores_window->show();
+    }
 }
   
 
