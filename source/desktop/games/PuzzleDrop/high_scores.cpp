@@ -4,6 +4,9 @@
 #include<string>
 #include<QInputDialog>
 
+Score::Score() : lines{0} {}
+Score::Score(QString n, int l) : name{n}, lines{l} {}
+
 bool Score::operator<(const Score &s) const {
     if(s.lines < lines) return true;
     return false;

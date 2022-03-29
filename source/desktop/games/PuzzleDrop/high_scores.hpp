@@ -7,6 +7,8 @@
 struct Score {
     QString name;
     int lines;
+    Score();
+    Score(QString n, int l);
     bool operator<(const Score &s) const;
 
 };
