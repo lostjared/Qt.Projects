@@ -38,15 +38,12 @@ void HighScores::paintEvent(QPaintEvent *e) {
     font.setPixelSize(30);
     font.setBold(true);
     paint.setPen(pen);
-
     font.setUnderline(true);
     paint.setFont(font);
     paint.drawText(50, 100, "Rank\t\tLines\t\tName");
     font.setUnderline(false);
     paint.setFont(font);
-
     int pos = 150;
-
     for(int i = 0; i < 10; ++i) {
         QString value;
         QTextStream stream(&value);

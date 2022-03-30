@@ -1,10 +1,7 @@
 #include"puzzle_drop.hpp"
 
 namespace puzzle {
-
-
 // *** Block
-
     Block::Block() : x{0}, y{0}, type{BlockType::BLOCK_NULL}, clear{0} {}
 
     Block::Block(int xx, int yy, BlockType t) : x{xx}, y{yy}, type{t}, clear{0} {}
@@ -71,7 +68,6 @@ namespace puzzle {
         return out;
     }
 
-
 // *** Piece
 
     Piece::Piece() {
@@ -107,7 +103,6 @@ namespace puzzle {
         position = p.position;
         return *this;
     }
-
 
     void Piece::newPiece(int start_x, int start_y) {
         blocks[0].x = start_x;
@@ -196,8 +191,6 @@ namespace puzzle {
         out << "Piece: " << p.blocks[0] << p.blocks[1] << p.blocks[2] << "\n";
         return out;
     }
-
-
 
 // *** Grid
 
@@ -320,9 +313,7 @@ namespace puzzle {
         
     }
 
-
     bool Grid::procBlocks() {
-
         for(int x = 0; x < grid_w; ++x) {
             for(int y = 0; y < grid_h; ++y) {
 
@@ -375,7 +366,6 @@ namespace puzzle {
                 }
 
                 // grid across
-
                  if(checkBlock(x,y,BlockType::RED1) && checkBlock(x+1,y,BlockType::RED2) && checkBlock(x+2,y,BlockType::RED3)) {
                    addScore();
                    blocks[x][y].clearBlock();

@@ -10,7 +10,6 @@ struct Score {
     Score();
     Score(QString n, int l);
     bool operator<(const Score &s) const;
-
 };
 
 class HighScores : public QDialog {
