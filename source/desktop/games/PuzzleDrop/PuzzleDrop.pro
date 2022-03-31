@@ -14,5 +14,5 @@ QT += widgets
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 RESOURCES += qresource.qrc
 # Input
-HEADERS += main_window.hpp puzzle_drop.hpp
-SOURCES += main.cpp main_window.cpp puzzle_drop.cpp
+HEADERS += main_window.hpp puzzle_drop.hpp high_scores.hpp
+SOURCES += main.cpp main_window.cpp puzzle_drop.cpp high_scores.cpp
