@@ -3,6 +3,9 @@
 #include<QTextStream>
 #include<string>
 #include<QInputDialog>
+#include<QPixmap>
+#include<QIcon>
+
 
 Score::Score() : lines{0} {}
 Score::Score(QString n, int l) : name{n}, lines{l} {}
@@ -15,6 +18,7 @@ bool Score::operator<(const Score &s) const {
 HighScores::HighScores(QWidget *parent) : QDialog(parent), settings("LostSideDead", "PuzzleDrop") {
     setFixedSize(640, 500);
     setWindowTitle("High Scores Window");
+    setWindowIcon(QIcon(QPixmap(":/img/green3.png").scaled(32, 32)));
     loadScores();
 }
 
