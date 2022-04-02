@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     name = "World";
     count = 0;
     button1 = new QPushButton(tr("Quit"), this);
-    button1->setGeometry(100, 100, 100, 25);
+    button1->setGeometry(100, 100, 200, 50);
     connect(button1, SIGNAL(clicked()), this, SLOT(exitProg()));
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(tickTimer()));
