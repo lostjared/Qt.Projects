@@ -28,6 +28,7 @@ public:
     void mousePressEvent(QMouseEvent *ke);
 private:
     InputBox *box;
+    InputBox *box_two;
 };
 
 

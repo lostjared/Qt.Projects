@@ -11,7 +11,6 @@
      input_box->setGeometry(125, 15, 100, 25);
      button = new QPushButton(tr("Ok"), this);
      button->setGeometry(250,15,50,25);
-
      connect(button, SIGNAL(clicked()), this, SLOT(onClick()));
  }
 
@@ -29,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setFixedSize(800, 600);
     box = new InputBox("Name", this);
     box->setGeometry(15, 15, 350, 50);
+
+    box_two = new InputBox("Name #2", this);
+    box_two->setGeometry(15, 200, 350, 50);
 }
 void MainWindow::mousePressEvent(QMouseEvent *ke) {
     QString value;
